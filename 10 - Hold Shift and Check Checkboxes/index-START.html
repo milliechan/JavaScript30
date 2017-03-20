@@ -104,6 +104,42 @@
   </div>
 
 <script>
+  // need onclick event listener on all checkboxes 
+  const checkboxes = document.querySelectorAll('input[type=checkbox]')
+  console.log(checkboxes)
+
+  let lastChecked; 
+
+  function handleCheck(e) {
+    console.log(e) // e is the click event
+    console.log(this) // this is the specific element checked
+
+
+    // check if they had shift key down 
+    // AND check that they are checking it 
+    let inBetween = false;
+    if (e.shiftKey && this.checked) {
+      // loop over each single checkbox
+      checkboxes.forEach(checkbox => {
+        if (checkbox === this || checkbox === lastChecked) {
+          inBetween = !inBetween; 
+          console.log('Starting to check them inbetween');
+        }
+
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+      });
+    }
+    lastChecked = this;
+  }
+
+  checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('click', handleCheck)
+  });
+
+
+ 
 </script>
 </body>
 </html>

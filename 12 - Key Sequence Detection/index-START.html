@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+const pressed = [];
+const secretCode = 'millie';
+
+function handleKonami(e) {
+  pressed.push(e.key);
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+  if (pressed.join('').includes(secretCode)){
+    console.log('DING');
+    cornify_add();
+  }
+  console.log(pressed);
+}
+
+window.addEventListener('keydown', handleKonami);
 </script>
 </body>
 </html>
